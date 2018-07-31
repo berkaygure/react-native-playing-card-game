@@ -1,7 +1,6 @@
 import React from 'react';
-import { StatusBar, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import commonStyle from '../styles';
 
 class GameStatusBar extends React.Component {
   render() {
@@ -9,7 +8,7 @@ class GameStatusBar extends React.Component {
       <View
         style={{
           flexDirection: 'row',
-          marginTop: 35,
+          marginTop: 10,
           marginLeft: 10,
           marginRight: 10,
           justifyContent: 'space-between',

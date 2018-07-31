@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar, View, TouchableOpacity, Image } from 'react-native';
+import { View, TouchableOpacity, Image } from 'react-native';
 import GameStatusBar from './GameStatusBar';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -21,18 +21,23 @@ class GameArea extends React.Component {
             justifyContent: 'space-around',
             alignItems: 'center',
           }}>
-          <TouchableOpacity
-            onPress={() => {
-              this.props.cardRequest();
-            }}>
-            <Image
-              resizeMode="stretch"
-              source={require('../assets/card/back.png')}
-              style={[commonStyle.card]}
-            />
-          </TouchableOpacity>
+          {this.props.deck.length > 0 ? (
+            <TouchableOpacity
+              onPress={() => {
+                this.props.cardRequest();
+              }}>
+              <Image
+                resizeMode="stretch"
+                source={require('../assets/card/back.png')}
+                style={[commonStyle.card]}
+              />
+            </TouchableOpacity>
+          ) : null}
           {this.props.openDeck.length > 0 ? (
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                this.props.addMyDeck();
+              }}>
               <Image
                 resizeMode="stretch"
                 source={
@@ -48,9 +53,10 @@ class GameArea extends React.Component {
   }
 }
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   return {
     openDeck: state.dataReducer.openDeck,
+    deck: state.dataReducer.deck,
   };
 }
 

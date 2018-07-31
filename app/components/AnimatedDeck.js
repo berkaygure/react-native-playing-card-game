@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  TouchableHighlight,
-  Animated,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import { View, Animated, TouchableOpacity, Image } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import commonStyle from '../styles';
@@ -80,8 +74,8 @@ class AnimatedDeck extends React.Component {
       Animated.sequence([
         Animated.timing(this.state.top, {
           toValue: -900,
-          duration: 300,
-          delay: 100,
+          duration: 200,
+          delay: 20,
         }),
         Animated.timing(this.state.top, {
           toValue: -175 / 2,
@@ -90,13 +84,13 @@ class AnimatedDeck extends React.Component {
         }),
         Animated.timing(this.state.top, {
           toValue: 900,
-          duration: 300,
-          delay: 100,
+          duration: 200,
+          delay: 20,
         }),
       ]),
       {
-        iterations: 5,
-      },
+        iterations: 3,
+      }
     ).start(() => {
       dealSound.stop();
       this.props.startGame();
@@ -104,7 +98,7 @@ class AnimatedDeck extends React.Component {
   }
 }
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   return {
     gameStart: state.dataReducer.gameStart,
     gameStarting: state.dataReducer.gameStarting,

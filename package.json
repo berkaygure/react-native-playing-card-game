@@ -1,5 +1,5 @@
 {
-  "name": "otuzbir",
+  "name": "game",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -24,6 +24,7 @@
     "babel-jest": "22.4.3",
     "babel-preset-react-native": "4.0.0",
     "jest": "22.4.3",
+    "prettier-eslint": "^8.8.1",
     "react-test-renderer": "16.3.1"
   },
   "jest": {

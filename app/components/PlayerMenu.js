@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { View } from 'react-native';
 import PlayerMenuButton from './PlayerMenuButton';
 
 export default class PlayerMenu extends React.Component {

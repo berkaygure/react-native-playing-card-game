@@ -12,7 +12,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import commonStyle from '../styles';
 import * as Actions from '../actions';
-import Card from './Card';
 
 class PlayerHand extends React.Component {
   degree = 20;
@@ -21,13 +20,16 @@ class PlayerHand extends React.Component {
   initAlpha = 0;
   cardsCount = 0;
   angleOfCard = 7;
-  step = 1;
-  a = 0;
-  b = 0;
+  step = 4;
+  a = 90;
+  b = 200;
+
   constructor(props) {
     super(props);
     this.screenWidth = Dimensions.get('window').width;
+  }
 
+  init() {
     this.cardsCount = this.props.playerHand.length;
     this.initAlpha = (180 - this.angleOfCard * (this.cardsCount - 1)) / 2;
     this.beta = (180 - this.step * (this.cardsCount - 1)) / 2 - 15;
@@ -38,7 +40,7 @@ class PlayerHand extends React.Component {
     this.dy = 0;
   }
 
-  calculateDegree(index, length) {
+  calculateDegree() {
     const transform = [
       {
         translateX: Number.parseInt(this.dx),
@@ -50,7 +52,7 @@ class PlayerHand extends React.Component {
         rotate: this.parseDegree(this.initAlpha),
       },
     ];
-
+    console.log(transform);
     this.beta += this.step;
     this.initAlpha += this.angleOfCard;
     this.betaRad = this.toRadian(this.beta);
@@ -79,7 +81,7 @@ class PlayerHand extends React.Component {
   }
 
   parseDegree(degree) {
-    return `${degree}rad`;
+    return `${degree}deg`;
   }
 
   getMarginTop(rotation, i, length) {
@@ -90,16 +92,16 @@ class PlayerHand extends React.Component {
     }
   }
 
-  getCardWrapperStyle(i, length) {
-    let direction = i < length / 2 ? -1 : 1;
-    const rotation = this.calculateDegree(i, this.props.playerHand.length);
-    const marginTop = this.getMarginTop(rotation, i, length);
+  getCardWrapperStyle(i) {
+    //let direction = i < length / 2 ? -1 : 1;
+    //const rotation = this.calculateDegree(i, this.props.playerHand.length);
+    //const marginTop = this.getMarginTop(rotation, i, length);
     const marginLeft = this.getIndentWidth(i, this.props.playerHand.length);
 
     return {
-      //marginLeft: marginLeft,
+      marginLeft: marginLeft,
       //marginTop: Math.abs(marginTop), // * direction,
-      transform: rotation,
+      //transform: rotation,
     };
   }
 
@@ -108,6 +110,7 @@ class PlayerHand extends React.Component {
   }
 
   render() {
+    this.init();
     return (
       <ImageBackground
         resizeMode="stretch"
@@ -118,9 +121,10 @@ class PlayerHand extends React.Component {
             {this.props.playerHand.map((card, i) => {
               return (
                 <Animated.View
+                  key={i}
                   style={this.getCardWrapperStyle(
                     i,
-                    this.props.playerHand.length,
+                    this.props.playerHand.length
                   )}>
                   <TouchableOpacity>
                     <Image
@@ -155,7 +159,7 @@ class PlayerHand extends React.Component {
   }
 }
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   return {
     gameStart: state.dataReducer.gameStart,
     playerHand: state.dataReducer.playerHand,

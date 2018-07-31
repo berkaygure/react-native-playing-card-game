@@ -6,7 +6,7 @@ export default class Card extends React.Component {
     return (
       <TouchableOpacity>
         <Image
-          resizeMode="stretch"
+          resize="stretch"
           source={require('../assets/card/2_of_clubs.png')}
           style={[
             commonStyle.card,

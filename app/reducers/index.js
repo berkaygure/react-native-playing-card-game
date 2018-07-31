@@ -1,5 +1,10 @@
 import { combineReducers } from 'redux';
-import { GAME_START, GAME_STARTED, CARD_REQUEST } from '../actions';
+import {
+  GAME_START,
+  GAME_STARTED,
+  CARD_REQUEST,
+  ADD_MY_DECK,
+} from '../actions/types';
 
 let dataState = {
   gameStart: false,
@@ -8,7 +13,7 @@ let dataState = {
   playerHand: [],
   computerHand: [],
   openDeck: [],
-  myTurn: false,
+  myTurn: true,
 };
 
 const dataReducer = (state = dataState, action) => {
@@ -37,7 +42,15 @@ const dataReducer = (state = dataState, action) => {
     case CARD_REQUEST: {
       return {
         ...state,
-        openDeck: [state.deck.shift(), state.deck.shift(), state.deck.shift()],
+        openDeck: [...state.openDeck, state.deck.shift()],
+      };
+    }
+    case ADD_MY_DECK: {
+      const card = state.openDeck.pop();
+      return {
+        ...state,
+        openDeck: state.openDeck.filter(x => x != card),
+        playerHand: [...state.playerHand, card],
       };
     }
     default:

@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, StatusBar, ImageBackground } from 'react-native';
-import { AnimatedDeck, PlayerMenu, PlayerHand, GameArea } from './components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import commonStyle from './styles';
+import { View, StatusBar, ImageBackground } from 'react-native';
+import { AnimatedDeck, PlayerMenu, PlayerHand, GameArea } from './components';
 import * as Actions from './actions';
+import commonStyle from './styles';
 
 class Game extends React.Component {
   constructor(props) {
@@ -13,7 +13,11 @@ class Game extends React.Component {
 
   render() {
     return (
-      <ImageBackground source={require('./assets/bg.png')} style={{ flex: 1 }}>
+      <ImageBackground
+        source={require('./assets/bg.png')}
+        style={{
+          flex: 1,
+        }}>
         <StatusBar hidden={true} />
         <View style={commonStyle.gameContainer}>
           <View style={this.getStyle()}>
@@ -34,8 +38,8 @@ class Game extends React.Component {
   }
 }
 
-function mapStateToProps(state, props) {
-  return { 
+function mapStateToProps(state) {
+  return {
     gameStart: state.dataReducer.gameStart,
     myTurn: state.dataReducer.myTurn,
   };

@@ -1,8 +1,5 @@
 import cards from '../assets/cards';
-
-export const GAME_START = 'game_start';
-export const GAME_STARTED = 'game_started';
-export const CARD_REQUEST = 'card_request';
+import { GAME_START, GAME_STARTED, CARD_REQUEST, ADD_MY_DECK } from './types';
 
 const card_type = ['clubs', 'diamonds', 'spades', 'hearths'];
 const card_numbers = [
@@ -21,7 +18,7 @@ const card_numbers = [
   '13',
 ];
 
-export const dealCards = (value = true) => {
+export const dealCards = () => {
   return dispatch => {
     dispatch({
       type: GAME_START,
@@ -46,6 +43,15 @@ export const startGame = (value = true) => {
     dispatch({
       type: GAME_STARTED,
       data: value,
+    });
+  };
+};
+
+export const addMyDeck = () => {
+  return dispatch => {
+    dispatch({
+      type: ADD_MY_DECK,
+      data: null,
     });
   };
 };
